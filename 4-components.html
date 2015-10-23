@@ -1,0 +1,51 @@
+<!doctype html>
+
+<title>4 Components - React From Zero</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+<div id='app'></div>
+
+<script type="text/babel">
+
+// The main selling point of React is its component system
+// components are used to encapsulate elements and their behaviour
+// see them as a mix of controller and view of MVC
+
+// Here we use stand alone elements and some data
+var data = 'world'
+var reactElement = <div>
+  <h1>Hello</h1>
+	<h2>{data}</h2>
+</div>
+
+// Here the elements are encapsuled in a simple component function
+// They have to start with a capital letter and
+// return exactly ONE root element with or without nested elements
+function MyComponent() {
+	var data = 'world'
+	return <div>
+	  <h1>Hello</h1>
+		<h2>{data}</h2>
+	</div>
+}
+
+// a component function can be used like an element
+reactElement = <MyComponent/>
+
+// this translates to a React.createElement() call
+// the null indicates that no properties have been set
+reactElement = React.createElement(MyComponent, null)
+
+//  for reference a react-internal <div> tag
+var anotherElement = <div/>
+// gets converted to
+anotherElement = React.createElement('div', null)
+
+var renderTarget = document.getElementById('app')
+
+ReactDOM.render(reactElement, renderTarget)
+
+</script>

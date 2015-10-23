@@ -1,0 +1,56 @@
+<!doctype html>
+
+<title>3 Nested Elements - React From Zero</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+<div id='app'></div>
+
+<script type="text/babel">
+
+// Elements can be nested, which will result in nested React.createElement calls
+// As you can imagine, writing withs without JSX would be pretty tedious
+var reactElement = <div className='abc'>
+  <h1>Hello</h1>
+	<h2>world</h2>
+</div>
+
+// they can also, like mentioned in lesson 2, contain JavaScript in {}
+var myClass = 'abc'
+
+function myText() {
+	return 'world'
+}
+
+// JavaScript insertion has the same syntax in attributes as in normal text or elements
+reactElement = <div className={myClass}>
+  <h1>Hello {10 * 10}</h1>
+	<h2>{myText()}</h2>
+</div>
+
+// this JavaScript can contain elements too
+var nestedElement = <h2>world</h2>
+
+reactElement = <div>
+  <h1>Hello</h1>
+  {nestedElement}
+</div>
+
+// it is also possible to "spread" an object as properties
+var properties = {
+	myClass: 'abc',
+	onClick: function() { alert('click') },
+}
+
+reactElement = <div {...properties}>
+  <h1>Hello</h1>
+	<h2>world</h2>
+</div>
+
+var renderTarget = document.getElementById('app')
+
+ReactDOM.render(reactElement, renderTarget)
+
+</script>

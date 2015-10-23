@@ -1,0 +1,35 @@
+<!doctype html>
+
+<title>1 Element Factory - React From Zero</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+
+<div id='app'></div>
+
+<script>
+
+// React.createElement() needs type, properties, children.
+// This is less verbose than using plain object literals,
+// it hides the $$type/Symbol stuff mentioned in 0
+var reactElement = React.createElement('h1', {
+
+	className:'abc',
+
+	style: {
+		textAlign: 'center',
+	},
+
+	onClick: function() { alert('click') },
+
+}, 'Hello, world!')
+
+
+// the second argument is the property object and has to be null if empty
+var anotherElement = React.createElement('p', null, 'A nice text paragraph.')
+
+var renderTarget = document.getElementById('app')
+
+ReactDOM.render(reactElement, renderTarget)
+
+</script>

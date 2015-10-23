@@ -1,0 +1,37 @@
+<!doctype html>
+
+<title>7 Property Example - React From Zero</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+
+<div id='app'></div>
+
+<script type="text/babel">
+
+// Here a more practical example of a component
+// it formats a date and returns a <span> containing that formatted string
+function DateSpan(props) {
+	var date = props.date,
+	  day = date.getDay(),
+	  month = date.getMonth() + 1,
+	  year = date.getFullYear()
+
+	return <span>{day}.{month}.{year}</span>
+}
+
+// Also a more sophisticated type check for the date property
+// The property is required, because there are no defaults set
+DateSpan.propTypes = {
+	date: React.PropTypes.instanceOf(Date).isRequired,
+}
+
+// We have to supply a date object and the component does the formatting
+var reactElement = <DateSpan date={new Date()}/>
+
+var renderTarget = document.getElementById('app')
+
+ReactDOM.render(reactElement, renderTarget)
+
+</script>
