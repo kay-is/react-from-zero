@@ -2,9 +2,9 @@
 
 <title>9 Component Classes - React From Zero</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
 
 <div id='app'></div>
 
@@ -44,7 +44,8 @@ var MyComponent = React.createClass({
 
   // this method handles all the clicks on the <span> element
 	handleClick: function() {
-		// every call of this.setState() triggers a call of render() with the new values in this.state
+		// every call of this.setState() triggers a call of render() with
+		// the new values in this.state
 		this.setState({
 			times: this.state.times + 1
 		})
@@ -63,8 +64,8 @@ var MyComponent = React.createClass({
 			color: this.props.color
 		}
 
-		// returning an element with a click-handler and the props and state values
-    // state is stored in this.state
+		// returning an element with a click-handler and the props and
+		// state values. state is stored in this.state
     return <span onClick={this.handleClick} style={style}>
 		  Clicked {this.state.times} times
 		</span>

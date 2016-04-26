@@ -2,9 +2,9 @@
 
 <title>5 Properties - React From Zero</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
 
 <div id='app'></div>
 
@@ -31,8 +31,9 @@ reactElement = <MyComponent {...props}/>
 // This allows components with dynamic content
 var planets = ['earth', 'mars', 'venus']
 
-var elements = planets.map(function(planet) {
-	return <MyComponent className='myClass' customData={planet}/>
+// If an array is used as "child node" each child needs a unique key-property
+var elements = planets.map(function(planet, index) {
+	return <MyComponent className='myClass' customData={planet} key={index}/>
 })
 
 reactElement = <div>{elements}</div>
