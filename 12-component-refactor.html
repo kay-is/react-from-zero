@@ -1,0 +1,138 @@
+<!doctype html>
+
+<title>12 Component Refactor - React From Zero</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+<div id='app'></div>
+
+<script type="text/babel">
+
+// Refactoring is another thing that is nice with React
+// First we'll talk about refactoring one component into another
+// if you're lucky, you can just change the implementation of a component
+// and don't need to change anything at the call-site
+
+// We start with a component that renders records somehow
+function ViewBefore(props) {
+  return <table>
+    <thead>
+      <tr>
+        <th>Room</th>
+        <th>People</th>
+      </tr>
+    </thead>
+    <tbody>
+      {props.rooms.map(function(room, k) {
+        return <tr key={k}>
+          <td>{room.name}</td>
+          <td>{room.people}</td>
+        </tr>
+      })}
+    </tbody>
+  </table>
+}
+
+// The component has a simple props-interface
+ViewBefore.propTypes = {
+  rooms: React.PropTypes.array.isRequired,
+}
+
+// Now we switch out the implementation with something more complicated
+function ViewAfter(props) {
+  return <div>
+    {props.rooms.map(function(room, k) {
+      var barStyle = {
+        display: 'inline-block',
+        background: 'lightgrey',
+        width: room.people * 25,
+      }
+      return <div key={k}>
+        {room.people > 0
+          ? <span style={barStyle}>{room.people} People</span>
+          : <span>0 People</span>
+        }
+        <span> in {room.name}</span>
+      </div>
+    })}
+  </div>
+}
+// We keep the props-interface the same
+ViewAfter.propTypes = {
+  rooms: React.PropTypes.array.isRequired,
+}
+
+// We could also switch it with something more dynamic
+var ViewDynamic = React.createClass({
+
+  // We still keep the props-interface the same
+  propTypes: {
+		rooms: React.PropTypes.array.isRequired,
+	},
+
+	getInitialState: function() {
+		return {currentRoom: 0}
+  },
+
+  componentDidMount() {
+
+    var component = this
+    var props = this.props
+    var state = this.state
+
+    this.interval = setInterval(function() {
+      var currentRoom = state.currentRoom < props.rooms.length
+        ? state.currentRoom + 1
+        : 0
+      component.setState({currentRoom: currentRoom})
+    }, 1000)
+
+  },
+
+  componentWillUnmount() {
+
+    clearInterval(this.interval)
+
+  },
+
+  render: function() {
+
+    var room = this.props.rooms[this.state.currentRoom]
+
+    return <span style={{color: this.state.color}}>
+      Room <b>{room.name}</b> has <b>{room.people}</b> People.
+    </span>
+
+  },
+
+})
+
+// Some data
+var rooms = [
+  {name:'Office', people: 10},
+  {name:'Kitchen', people: 15},
+  {name:'Floor', people: 3},
+  {name:'Bathroom', people: 0},
+]
+
+// As we can see the components can be used exactly the same
+// If we copy the implementation of ViewAfter into ViewBefore,
+// everything keeps working
+var reactElement = <div style={{margin: 'auto', width: 500}}>
+
+  <h3>Before the refactor</h3>
+  <ViewBefore rooms={rooms}/>
+
+  <h3>After the refactor</h3>
+  <ViewAfter rooms={rooms}/>
+
+  <h3>Dynamic refactor</h3>
+  <ViewDynamic rooms={rooms}/>
+
+</div>
+
+ReactDOM.render(reactElement, document.getElementById('app'))
+
+</script>

@@ -1,0 +1,119 @@
+<!doctype html>
+
+<title>11 Lifecycle Methods - React From Zero</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+<div id='app'></div>
+
+<script type="text/babel">
+
+// If we use component classes, our components inherit
+// a bunch of methods, which get called by React at specific
+// times to allow us to get more control over our components
+// a few of them we already met in lesson 9
+// Here are a few new. Not all of them, but the most important ones
+
+var TRANSLATION_FROM_SOMEWHERE = 'Text from a synchronous source.'
+
+var MyComponent = React.createClass({
+
+  // This method is for default prop values
+  // it gets called before the props are given to our component
+  // the "real" props override them if there are any
+	getDefaultProps: function() {
+    return {
+      iGetOverriden: 'default',
+      iStayAsIAm: 'default',
+    }
+  },
+
+  // This method is called before a component got mounted to the DOM
+  // it returns values that are used for this.state
+	getInitialState: function() {
+    return {
+      serverData: null,
+    }
+  },
+
+  // This method gets called right before the component is mounted
+  // can be used to initialize some synchronous configuration, that should
+  // be available before the component renders
+  componentWillMount: function() {
+    this.TEXT = TRANSLATION_FROM_SOMEWHERE
+  },
+
+  // This method will be called right after the component got mounted
+  // it's a good place to start some asynchronous tasks.
+  // For example on the first mount it shows a loading message
+  // then componentDidMount is called and gets some server data.
+  componentDidMount: function() {
+
+    var component = this
+
+    // We clean up the data and get new from somewhere
+    function loadData() {
+
+      component.setState({serverData: null})
+
+      getServerData(function(data) {
+        component.setState({serverData: data})
+      })
+
+    }
+
+    // Initial data load
+    loadData()
+
+    // We simulate a server request every 4 seconds
+    this.updateInterval = setInterval(loadData, 4000)
+
+  },
+
+  // This method will be called before the component gets removed from the DOM
+  // a bit like a destructor. Here we can do some cleanup.
+  componentWillUnmount: function() {
+
+    clearInterval(this.updateInterval)
+
+  },
+
+  // This method is called before a render when new props or state is available
+  // it won't be called on the first render or if this.forceUpdate() is used
+  // it can be used if some state or prop changes don't require a rerender
+  shouldComponentUpdate: function(nextProps, nextState) {
+
+    // we want to render on every change, this is the default behaviour
+    return true
+
+  },
+
+  render: function() {
+
+    return <h2 style={{width: 400, margin: 'auto'}}>
+
+      Overriden Prop: {this.props.iGetOverriden}<br/><br/>
+
+      Default Prop: {this.props.iStayAsIAm}<br/><br/>
+
+      {this.TEXT}<br/><br/>
+
+      {this.state.serverData
+        ? this.state.serverData
+        : 'Loading...'
+      }
+    </h2>
+
+  },
+
+})
+
+function getServerData(fn) {
+  setTimeout(function() { fn('Data Loaded!') }, 700)
+}
+
+ReactDOM.render(<MyComponent iGetOverriden={'override'}/>, document.getElementById('app'))
+
+</script>
