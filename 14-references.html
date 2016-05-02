@@ -1,0 +1,60 @@
+<!doctype html>
+
+<title>14 References - React From Zero</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
+<div id='app'></div>
+
+<script type="text/babel">
+
+// Sometimes we need some state from an element or a component
+// or it has to be directly modified somehow. For
+// this case, we can tell React to create references.
+// These are named properties of a class component
+// stored in this.refs after the component got rendered.
+
+var RefComponent = React.createClass({
+
+  // First we tell React to render an input with a
+  // ref attribute the resulting DOM element will
+  // be stored into this.refs.nameInput
+  // We also add a callback to a button
+  render: function() {
+    return <div>
+      <input ref='nameInput'/>
+      <button onClick={this.handleClick}>Do Something</button>
+    </div>
+  },
+
+  // The callback is called when th button is clicked
+  // and uses this.refs.nameInput to read out the value
+  // of the input.
+  // For elements the rendered DOM node will be stored
+  // For components the instance of the component will
+  // be stored.
+  handleClick: function() {
+
+    console.log(this.refs.nameInput.value)
+
+  },
+
+})
+
+// Since references are local to their component
+// they can be used as local IDs to get elements
+// and don't override each other when another
+// instance of the component is created
+var reactElement = <div>
+  <RefComponent/>
+  <RefComponent/>
+  <RefComponent/>
+</div>
+
+
+ReactDOM.render(reactElement, document.getElementById('app'))
+
+</script>
