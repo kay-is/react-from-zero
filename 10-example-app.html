@@ -17,8 +17,8 @@
 // First we have the Task and TaskList
 // They get all their data/state through their properties
 // <TaskList>
-//   <Task text='Do something'/>
-//   <Task text='Do nothing'/>
+//	 <Task text='Do something'/>
+//	 <Task text='Do nothing'/>
 // </TaskList>
 
 // Task needs a text property
@@ -29,8 +29,10 @@ function Task(props) {
 // TaskList needs an array of Task in its children property
 function TaskList(props) {
 	// Print the first element bold
-	props.children[0] = <b key={0}>{props.children[0]}</b>
-	return <ul>{props.children}</ul>
+	return <ul>
+		<b key={0}>{props.children[0]}</b>
+		{props.children.slice(1)}
+	</ul>
 }
 
 // This component handles the input
@@ -45,12 +47,12 @@ var TaskInput = React.createClass({
 
 	// gets called when someone types into the <input> element
 	handleChange: function(e) {
-    this.setState({
+		this.setState({
 			value: e.target.value,
 		})
 	},
 
-  // gets called when someone clicks the <button> element
+	// gets called when someone clicks the <button> element
 	handleAdd: function(e) {
 		if (!this.state.value) return
 
@@ -58,7 +60,7 @@ var TaskInput = React.createClass({
 		this.props.onAdd(this.state.value)
 
 		// clear the state so the input is empy again after an add
-	  this.setState({
+		this.setState({
 			value: '',
 		})
 	},
@@ -67,7 +69,7 @@ var TaskInput = React.createClass({
 	render: function() {
 		return <div>
 
-			<input placeholder='Enter Task...' ref='todoInput' value={this.state.value} onChange={this.handleChange}/>
+			<input placeholder='Enter Task	.' ref='todoInput' value={this.state.value} onChange={this.handleChange}/>
 
 			<button onClick={this.handleAdd}>Add</button>
 
@@ -87,10 +89,8 @@ var TodoApp = React.createClass({
 
 	// this callback will be inserted into the onAdd property of the <TaskInput> component
 	handleAdd: function(task) {
-		var tasks = this.state.tasks
-
 		// adding a new task
-		tasks.unshift(task)
+		var tasks = [task].concat(this.state.tasks)
 
 		// this forces the <TodoApp> component to render
 		this.setState({
@@ -98,7 +98,7 @@ var TodoApp = React.createClass({
 		})
 	},
 
-  render: function() {
+	render: function() {
 
 		// create the list of <Task> components from the tasks array in the state
 		var taskElements = this.state.tasks.map(function(t, i) { return <Task key={i} text={t}/> })
@@ -114,7 +114,7 @@ var TodoApp = React.createClass({
 			</TaskList>
 
 		</div>
-  },
+	},
 
 })
 
