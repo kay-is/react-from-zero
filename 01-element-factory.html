@@ -1,35 +1,34 @@
 <!doctype html>
 
-<title>1 Element Factory - React From Zero</title>
+<title>01 Element Factory - React From Zero</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
+<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
 
 <div id='app'></div>
 
 <script>
+  // React.createElement() needs type, properties, children.
+  // This is less verbose than using plain object literals,
+  // it hides the $$type/Symbol stuff mentioned in 0
+  var reactElement = React.createElement('h1', {
 
-// React.createElement() needs type, properties, children.
-// This is less verbose than using plain object literals,
-// it hides the $$type/Symbol stuff mentioned in 0
-var reactElement = React.createElement('h1', {
+    className: 'abc',
 
-	className:'abc',
+    style: {
+      textAlign: 'center',
+    },
 
-	style: {
-		textAlign: 'center',
-	},
+    onClick: function () { alert('click') },
 
-	onClick: function() { alert('click') },
-
-}, 'Hello, world!')
+  }, 'Hello, world!')
 
 
-// the second argument is the property object and has to be null if empty
-var anotherElement = React.createElement('p', null, 'A nice text paragraph.')
+  // the second argument is the property object and has to be null if empty
+  var anotherElement = React.createElement('p', null, 'A nice text paragraph.')
 
-var renderTarget = document.getElementById('app')
+  var renderTarget = document.getElementById('app')
 
-ReactDOM.render(reactElement, renderTarget)
+  ReactDOM.render(reactElement, renderTarget)
 
 </script>

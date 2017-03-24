@@ -2,20 +2,20 @@
 
 <title>16 Advanced Integration - React From Zero</title>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js'></script>
+<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
 
-<script src='https://d3js.org/d3.v4.0.0-alpha.33.min.js'>
+<script src="https://unpkg.com/d3@4.7.3/build/d3.min.js">
 // Sometimes we need to integrate more complex
 // libraries. Libraries that want to use the
 // DOM directly or require asynchronous interaction.
 // In this example we use D3.js, a free InfoVis library.
 </script>
 
-<div id='app'></div>
+<div id="app"></div>
 
-<script type='text/babel'>
+<script type="text/babel">
 
 // Since D3 needs to interact directly with the DOM we
 // should use a component class, because it can store
@@ -23,34 +23,32 @@
 var Visual = React.createClass({
 
   // We simply render an empty canvas and tell React to
-  // store its reference after the render into this.refs
+  // store its reference after the render
   render: function() {
+    return <canvas ref={this.handleRef} width={500} height={500}/>
+  },
 
-    return <canvas ref='canvas' width={500} height={500}/>
-
+  handleRef: function(canvas) {
+    this.canvas = canvas
   },
 
   // After the first render, we grab the reference
   // to the canvas element in the DOM and pass it
   // to the library
-  componentDidMount: function () {
-
+  componentDidMount: function() {
     // Here we also use some additional color configuration
-    drawGraph(this.refs.canvas, this.props.color)
-
+    drawGraph(this.canvas, this.props.color)
   },
 
   // We also have some fine-granular control over the re-render
   // With the use of this lifecylce method
   shouldComponentUpdate: function(nextProps, nextState) {
-
     // Here we could tell our library the new data for props
     // or state, so it can update the DOM elements on its own
 
     // At the end we always return false so our render method
     // isn't called and the canvas element isn't replaced
     return false
-
   },
 
   // This lifecycle method can be used to free resources
@@ -79,14 +77,12 @@ ReactDOM.render(reactElement, document.getElementById('app'))
 function drawGraph(canvas, strokeColor) {
 
   // An example from http://bl.ocks.org/mbostock/1b64ec067fcfc51e7471d944f51f1611
-  // its realeased under the GPL V3
+  // its realeased under the GPL-V3
 
   var n = 20
 
   var nodes = d3.range(n * n).map(function(i) {
-    return {
-      index: i
-    }
+    return {index: i}
   })
 
   var links = []

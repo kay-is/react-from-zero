@@ -1,29 +1,31 @@
 <!doctype html>
 
-<title>5 Properties - React From Zero</title>
+<title>05 Properties - React From Zero</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
 
-<div id='app'></div>
+<div id="app"></div>
 
 <script type="text/babel">
 
 // Components, like elements, can use properties, too
 function MyComponent(props) {
-	return <div className={props.className}>
-	  <h1>Hello</h1>
-		<h2>{props.customData}</h2>
-	</div>
+  return (
+    <div className={props.className}>
+      <h1>Hello</h1>
+      <h2>{props.customData}</h2>
+    </div>
+  )
 }
 
 var reactElement = <MyComponent className='abc' customData='world'/>
 
 // Which also works with an object and the spread (...) operator
 var props = {
-	className: 'abc',
-	customData: 'world',
+  className: 'abc',
+  customData: 'world',
 }
 
 reactElement = <MyComponent {...props}/>
@@ -33,7 +35,7 @@ var planets = ['earth', 'mars', 'venus']
 
 // If an array is used as "child node" each child needs a unique key-property
 var elements = planets.map(function(planet, index) {
-	return <MyComponent className='myClass' customData={planet} key={index}/>
+  return <MyComponent className='myClass' customData={planet} key={index}/>
 })
 
 reactElement = <div>{elements}</div>

@@ -2,24 +2,26 @@
 
 <title>15 Simple Integration - React From Zero</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js">
+<script src="https://unpkg.com/moment@2.18.1/min/moment.min.js">
 // Most of the time we have to use third party libraries
 // in our applications. Here we integrate a simple one
 // for date handling and use it with React. It doesn't
 // use the DOM so it can be integrated fairly easy.
 </script>
 
-<div id='app'></div>
+<div id="app"></div>
 
 <script type="text/babel">
 // Simple libraries that are called synchronous can used
 // directly in JSX with the help of {}, since they are
 // just function calls
-var DateToday = () => <span>{moment().format('DD.MM.YYYY')}</span>
+var DateToday = function() {
+  return <span>{moment().format('DD.MM.YYYY')}</span>
+}
 
 var tomorrow = moment().add(1, 'day')
 

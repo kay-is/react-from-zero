@@ -1,12 +1,12 @@
 <!doctype html>
 
-<title>9 Component Classes - React From Zero</title>
+<title>09 Component Classes - React From Zero</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
 
-<div id='app'></div>
+<div id="app"></div>
 
 <script type="text/babel">
 
@@ -17,58 +17,63 @@
 // we need a component class with a render function
 var MyComponent = React.createClass({
 
-	// used for type-checking of the properties
-	// same as with the component function
+  // used for type-checking of the properties
+  // same as with the component function
   propTypes: {
-		color: React.PropTypes.string,
-	},
-
-	// this method will be called by React
-	// before the components gets mounted into the DOM
-	getDefaultProps: function() {
-    return {
-			color: 'green'
-		}
+    color: React.PropTypes.string,
   },
 
-	// this method will be called by React
-	// before the components gets mounted into the DOM
-	// if this method is missing, this.state will be undefined
-	getInitialState: function() {
+  // this method will be called by React
+  // before the components gets mounted into the DOM
+  getDefaultProps: function() {
+    return {color: 'green'}
+  },
 
+  // this method will be called by React
+  // before the components gets mounted into the DOM
+  // if this method is missing, this.state will be undefined
+  getInitialState: function() {
     // The state can be any JavaScript value, often it is an object
-		return {
-			times: 0
-		}
+    return {times: 0}
   },
 
   // this method handles all the clicks on the <span> element
-	handleClick: function() {
-		// every call of this.setState() triggers a call of render() with
-		// the new values in this.state
-		this.setState({
-			times: this.state.times + 1
-		})
-	},
+  handleClick: function() {
+    // setState() can be called with an object that contains the new state
+    // normally this triggers a call of render(), but React can batch multiple
+    // calls and defer the render() call (make the call asynchronous)
+    // To prevent this, setState can take a callback instead
 
-	// this method will be called by React
-	// after the component got mounted into the DOM
-	// also every time this.setState() was called
-	// it's like the component function from before
-	// but without a props argument
+    // This can lead to unexpected behaviour, if we rely on this.state or
+    // this.props for our calculations
+    // this.setState({times: this.state.times + 1})
+
+    // The callback version doesn't have this problem
+    // The callback gets the right state and props at time of the update
+    this.setState(function(prevState, props) {
+      return {times: prevState.times + 1}
+    })
+
+  },
+
+  // this method will be called by React
+  // after the component got mounted into the DOM
+  // also every time this.setState() was called
+  // it's like the component function from before
+  // but without a props argument
   render: function() {
 
     // using the prop given by the creator of this component
     // properties are now in this.props instead of the props argument
-		var style = {
-			color: this.props.color
-		}
+    var style = {color: this.props.color}
 
-		// returning an element with a click-handler and the props and
-		// state values. state is stored in this.state
-    return <span onClick={this.handleClick} style={style}>
-		  Clicked {this.state.times} times
-		</span>
+    // returning an element with a click-handler and the props and
+    // state values. state is stored in this.state
+    return (
+      <span onClick={this.handleClick} style={style}>
+        Clicked {this.state.times} times
+      </span>
+    )
 
   },
 
@@ -78,13 +83,14 @@ var MyComponent = React.createClass({
 // one with default color
 // Everything works exactly like with the simpler component functions
 // The interface has not changed for the user of this component
-var reactElement = <div>
-  <MyComponent color='red'/>
-	<br/>
-  <MyComponent color='blue'/>
-	<br/>
-  <MyComponent/>
-</div>
+var reactElement =
+  <div>
+    <MyComponent color='red'/>
+    <br/>
+    <MyComponent color='blue'/>
+    <br/>
+    <MyComponent/>
+  </div>
 
 var renderTarget = document.getElementById('app')
 

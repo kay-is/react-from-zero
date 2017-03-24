@@ -2,11 +2,11 @@
 
 <title>10 Example App - React From Zero</title>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.0.1/react-dom.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
 
-<div id='app'></div>
+<div id="app"></div>
 
 <script type="text/babel">
 
@@ -17,104 +17,104 @@
 // First we have the Task and TaskList
 // They get all their data/state through their properties
 // <TaskList>
-//	 <Task text='Do something'/>
-//	 <Task text='Do nothing'/>
+//   <Task text='Do something'/>
+//   <Task text='Do nothing'/>
 // </TaskList>
 
 // Task needs a text property
 function Task(props) {
-	return <li>{props.text}</li>
+  return <li>{props.text}</li>
 }
 
 // TaskList needs an array of Task in its children property
 function TaskList(props) {
-	// Print the first element bold
-	return <ul>
-		<b key={0}>{props.children[0]}</b>
-		{props.children.slice(1)}
-	</ul>
+  // Print the first element bold
+  return (
+    <ul>
+      <b key={0}>{props.children[0]}</b>
+      {props.children.slice(1)}
+    </ul>
+  )
 }
 
 // This component handles the input
 // It needs to be a class, because the <input> element is stateful
 var TaskInput = React.createClass({
 
-	getInitialState: function() {
-		return {
-			value: '',
-		}
-	},
+  getInitialState: function() {
+    return {value: ''}
+  },
 
-	// gets called when someone types into the <input> element
-	handleChange: function(e) {
-		this.setState({
-			value: e.target.value,
-		})
-	},
+  // gets called when someone types into the <input> element
+  handleChange: function(e) {
+    this.setState({value: e.target.value})
+  },
 
-	// gets called when someone clicks the <button> element
-	handleAdd: function(e) {
-		if (!this.state.value) return
+  // gets called when someone clicks the <button> element
+  handleAdd: function(e) {
+    if (!this.state.value) return
 
-		// call the function that was added into its onAdd property
-		this.props.onAdd(this.state.value)
+    // call the function that was added into its onAdd property
+    this.props.onAdd(this.state.value)
 
-		// clear the state so the input is empy again after an add
-		this.setState({
-			value: '',
-		})
-	},
+    // clear the state so the input is empy again after an add
+    this.setState({value: ''})
+  },
 
-	// renders the elements every time someone types or adds
-	render: function() {
-		return <div>
+  // renders the elements every time someone types or adds
+  render: function() {
+    return (
+      <div>
 
-			<input placeholder='Enter Task	.' ref='todoInput' value={this.state.value} onChange={this.handleChange}/>
+        <input
+          placeholder='Enter Task	.'
+          value={this.state.value}
+          onChange={this.handleChange}/>
 
-			<button onClick={this.handleAdd}>Add</button>
+        <button onClick={this.handleAdd}>Add</button>
 
-		</div>
-	},
+      </div>
+    )
+  },
 
 })
 
 // The app keeps track of the current tasks in its state
 var TodoApp = React.createClass({
 
-	getInitialState: function(){
-		return {
-			tasks: [],
-		}
-	},
+  getInitialState: function() {
+    return {tasks: []}
+  },
 
-	// this callback will be inserted into the onAdd property of the <TaskInput> component
-	handleAdd: function(task) {
-		// adding a new task
-		var tasks = [task].concat(this.state.tasks)
+  // this callback will be inserted into the onAdd property of the <TaskInput> component
+  handleAdd: function(task) {
+    // adding a new task
+    var tasks = [task].concat(this.state.tasks)
 
-		// this forces the <TodoApp> component to render
-		this.setState({
-			tasks: tasks,
-		})
-	},
+    // this forces the <TodoApp> component to render
+    this.setState({tasks: tasks})
+  },
 
-	render: function() {
+  render: function() {
+    // create the list of <Task> components from the tasks array in the state
+    var taskElements = this.state.tasks.map(function(t, i) {
+      return <Task key={i} text={t}/>
+    })
 
-		// create the list of <Task> components from the tasks array in the state
-		var taskElements = this.state.tasks.map(function(t, i) { return <Task key={i} text={t}/> })
+    // some simple styling
+    // and adding the add handler to the <TaskInput> component
+    return (
+      <div style={{width: 300, margin: 'auto'}}>
 
-		// some simple styling
-		// and adding the add handler to the <TaskInput> component
-		return <div style={{width: 300, margin: 'auto'}}>
+        <TaskInput onAdd={this.handleAdd}/>
 
-			<TaskInput onAdd={this.handleAdd}/>
+        <TaskList>
+          {taskElements}
+        </TaskList>
 
-			<TaskList>
-				{taskElements}
-			</TaskList>
-
-		</div>
-	},
+      </div>
+    )
+  },
 
 })
 
