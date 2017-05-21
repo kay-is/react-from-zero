@@ -83,11 +83,10 @@ var ViewDynamic = React.createClass({
   componentDidMount() {
     var component = this
     var props = this.props
-    var state = this.state
 
     this.interval = setInterval(function() {
-      var currentRoom = state.currentRoom < props.rooms.length
-        ? state.currentRoom + 1
+      var currentRoom = component.state.currentRoom < props.rooms.length - 1
+        ? component.state.currentRoom + 1
         : 0
       component.setState({currentRoom: currentRoom})
     }, 1000)
