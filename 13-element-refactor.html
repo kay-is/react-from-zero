@@ -4,9 +4,9 @@
 
 <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
 <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
-<script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-<div id='app'></div>
+<div id="app"></div>
 
 <script type="text/babel">
 
@@ -27,7 +27,7 @@ component = React.createElement(Div, null)
 
 } catch(e) {}
 
-// Second, React converts all events, these elements trigger, to
+// Second, React converts all events these elements trigger, to
 // synthetic events. This is often not a problem, they are simply events.
 // But you can't trigger your own.
 // So even if your <Input> component accepts a onClick callback as property
