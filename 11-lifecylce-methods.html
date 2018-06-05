@@ -2,31 +2,30 @@
 
 <title>11 Lifecycle Methods - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/create-react-class@15.6.3/create-react-class.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <div id="app"></div>
 
 <script type="text/babel">
-
 // If we use component classes, our components inherit
 // a bunch of methods, which get called by React at specific
 // times to allow us to get more control over our components
 // a few of them we already met in lesson 9
 // Here are a few new. Not all of them, but the most important ones
 
-var TRANSLATION_FROM_SOMEWHERE = 'Text from a synchronous source.'
+var TRANSLATION_FROM_SOMEWHERE = "Text from a synchronous source."
 
-var MyComponent = React.createClass({
-
+var MyComponent = createReactClass({
   // This method is for default prop values
   // it gets called before the props are given to our component
   // the "real" props override them if there are any
   getDefaultProps: function() {
     return {
-      iGetOverriden: 'default',
-      iStayAsIAm: 'default',
+      iGetOverriden: "default",
+      iStayAsIAm: "default",
     }
   },
 
@@ -79,8 +78,8 @@ var MyComponent = React.createClass({
   },
 
   // This method is called before a render when new props or state is available
-  // it won't be called on the first render or if this.forceUpdate() is used
-  // it can be used if some state or prop changes don't require a rerender
+  // it won"t be called on the first render or if this.forceUpdate() is used
+  // it can be used if some state or prop changes don"t require a rerender
   shouldComponentUpdate: function(nextProps, nextState) {
 
     // we want to render on every change, this is the default behaviour
@@ -90,7 +89,7 @@ var MyComponent = React.createClass({
 
   render: function() {
     return (
-      <h2 style={{width: 400, margin: 'auto'}}>
+      <h2 style={{width: 400, margin: "auto"}}>
 
         Overriden Prop: {this.props.iGetOverriden}<br/><br/>
 
@@ -100,7 +99,7 @@ var MyComponent = React.createClass({
 
         {this.state.serverData
           ? this.state.serverData
-          : 'Loading...'
+          : "Loading..."
         }
       </h2>
     )
@@ -109,9 +108,8 @@ var MyComponent = React.createClass({
 })
 
 function getServerData(fn) {
-  setTimeout(function() { fn('Data Loaded!') }, 700)
+  setTimeout(function() { fn("Data Loaded!") }, 700)
 }
 
-ReactDOM.render(<MyComponent iGetOverriden={'override'}/>, document.getElementById('app'))
-
+ReactDOM.render(<MyComponent iGetOverriden={"override"}/>, document.getElementById("app"))
 </script>

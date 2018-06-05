@@ -2,8 +2,9 @@
 
 <title>16 Advanced Integration - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/create-react-class@15.6.3/create-react-class.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script src="https://unpkg.com/d3@4.7.3/build/d3.min.js">
@@ -16,11 +17,10 @@
 <div id="app"></div>
 
 <script type="text/babel">
-
 // Since D3 needs to interact directly with the DOM we
 // should use a component class, because it can store
 // references to its DOM-elements.
-var Visual = React.createClass({
+var Visual = createReactClass({
 
   // We simply render an empty canvas and tell React to
   // store its reference after the render
@@ -66,12 +66,12 @@ var Visual = React.createClass({
 // reference stored, also its own color property
 var reactElement =
   <div>
-    <Visual color='#f00'/>
-    <Visual color='#0f0'/>
-    <Visual color='#00f'/>
+    <Visual color="#f00"/>
+    <Visual color="#0f0"/>
+    <Visual color="#00f"/>
   </div>
 
-ReactDOM.render(reactElement, document.getElementById('app'))
+ReactDOM.render(reactElement, document.getElementById("app"))
 
 // Wrapping the library interaction into a function
 function drawGraph(canvas, strokeColor) {
@@ -95,11 +95,11 @@ function drawGraph(canvas, strokeColor) {
   }
 
   d3.forceSimulation(nodes)
-    .force('charge', d3.forceManyBody().strength(-30))
-    .force('link', d3.forceLink(links).distance(20).iterations(10))
-    .on('tick', ticked)
+    .force("charge", d3.forceManyBody().strength(-30))
+    .force("link", d3.forceLink(links).distance(20).iterations(10))
+    .on("tick", ticked)
 
-  var context = canvas.getContext('2d')
+  var context = canvas.getContext("2d")
   var width = canvas.width
   var height = canvas.height
 
@@ -110,7 +110,7 @@ function drawGraph(canvas, strokeColor) {
 
     context.beginPath()
     links.forEach(drawLink)
-    context.strokeStyle = '#aaa'
+    context.strokeStyle = "#aaa"
     context.stroke()
 
     context.beginPath()

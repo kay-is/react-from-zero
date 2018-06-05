@@ -2,14 +2,14 @@
 
 <title>10 Example App - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/create-react-class@15.6.3/create-react-class.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <div id="app"></div>
 
 <script type="text/babel">
-
 // An example of a simple React app
 // It uses simple component functions for its stateless components
 // and a complex component class to handle the interactions
@@ -17,8 +17,8 @@
 // First we have the Task and TaskList
 // They get all their data/state through their properties
 // <TaskList>
-//   <Task text='Do something'/>
-//   <Task text='Do nothing'/>
+//   <Task text="Do something"/>
+//   <Task text="Do nothing"/>
 // </TaskList>
 
 // Task needs a text property
@@ -39,10 +39,10 @@ function TaskList(props) {
 
 // This component handles the input
 // It needs to be a class, because the <input> element is stateful
-var TaskInput = React.createClass({
+var TaskInput = createReactClass({
 
   getInitialState: function() {
-    return {value: ''}
+    return {value: ""}
   },
 
   // gets called when someone types into the <input> element
@@ -58,7 +58,7 @@ var TaskInput = React.createClass({
     this.props.onAdd(this.state.value)
 
     // clear the state so the input is empy again after an add
-    this.setState({value: ''})
+    this.setState({value: ""})
   },
 
   // renders the elements every time someone types or adds
@@ -67,7 +67,7 @@ var TaskInput = React.createClass({
       <div>
 
         <input
-          placeholder='Enter Task	.'
+          placeholder="Enter Task	."
           value={this.state.value}
           onChange={this.handleChange}/>
 
@@ -80,7 +80,7 @@ var TaskInput = React.createClass({
 })
 
 // The app keeps track of the current tasks in its state
-var TodoApp = React.createClass({
+var TodoApp = createReactClass({
 
   getInitialState: function() {
     return {tasks: []}
@@ -104,7 +104,7 @@ var TodoApp = React.createClass({
     // some simple styling
     // and adding the add handler to the <TaskInput> component
     return (
-      <div style={{width: 300, margin: 'auto'}}>
+      <div style={{width: 300, margin: "auto"}}>
 
         <TaskInput onAdd={this.handleAdd}/>
 
@@ -118,7 +118,7 @@ var TodoApp = React.createClass({
 
 })
 
-var renderTarget = document.getElementById('app')
+var renderTarget = document.getElementById("app")
 
 // we can use components directly
 ReactDOM.render(<TodoApp/>, renderTarget)

@@ -2,14 +2,13 @@
 
 <title>05 Properties - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <div id="app"></div>
 
 <script type="text/babel">
-
 // Components, like elements, can use properties, too
 function MyComponent(props) {
   return (
@@ -20,28 +19,27 @@ function MyComponent(props) {
   )
 }
 
-var reactElement = <MyComponent className='abc' customData='world'/>
+var reactElement = <MyComponent className="abc" customData="world"/>
 
 // Which also works with an object and the spread (...) operator
 var props = {
-  className: 'abc',
-  customData: 'world',
+  className: "abc",
+  customData: "world",
 }
 
 reactElement = <MyComponent {...props}/>
 
 // This allows components with dynamic content
-var planets = ['earth', 'mars', 'venus']
+var planets = ["earth", "mars", "venus"]
 
 // If an array is used as "child node" each child needs a unique key-property
 var elements = planets.map(function(planet, index) {
-  return <MyComponent className='myClass' customData={planet} key={index}/>
+  return <MyComponent className="myClass" customData={planet} key={index}/>
 })
 
 reactElement = <div>{elements}</div>
 
-var renderTarget = document.getElementById('app')
+var renderTarget = document.getElementById("app")
 
 ReactDOM.render(reactElement, renderTarget)
-
 </script>

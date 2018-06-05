@@ -2,14 +2,13 @@
 
 <title>08 Nested Components - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <div id="app"></div>
 
 <script type="text/babel">
-
 // Components, like elements, can be nested
 // for this, the children property is used inside the component
 
@@ -39,8 +38,7 @@ var reactElement =
     </List>
   </div>
 
-var renderTarget = document.getElementById('app')
+var renderTarget = document.getElementById("app")
 
 ReactDOM.render(reactElement, renderTarget)
-
 </script>

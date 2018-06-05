@@ -2,14 +2,15 @@
 
 <title>12 Component Refactor - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/create-react-class@15.6.3/create-react-class.js"></script>
+<script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <div id="app"></div>
 
 <script type="text/babel">
-
 // Refactoring is another thing that is nice with React
 // First we'll talk about refactoring one component into another
 // if you're lucky, you can just change the implementation of a component
@@ -39,7 +40,7 @@ function ViewBefore(props) {
 
 // The component has a simple props-interface
 ViewBefore.propTypes = {
-  rooms: React.PropTypes.array.isRequired,
+  rooms: PropTypes.array.isRequired,
 }
 
 // Now we switch out the implementation with something more complicated
@@ -48,8 +49,8 @@ function ViewAfter(props) {
     <div>
       {props.rooms.map(function(room, k) {
         var barStyle = {
-          display: 'inline-block',
-          background: 'lightgrey',
+          display: "inline-block",
+          background: "lightgrey",
           width: room.people * 25,
         }
         return <div key={k}>
@@ -65,15 +66,15 @@ function ViewAfter(props) {
 }
 // We keep the props-interface the same
 ViewAfter.propTypes = {
-  rooms: React.PropTypes.array.isRequired,
+  rooms: PropTypes.array.isRequired,
 }
 
 // We could also switch it with something more dynamic
-var ViewDynamic = React.createClass({
+var ViewDynamic = createReactClass({
 
   // We still keep the props-interface the same
   propTypes: {
-    rooms: React.PropTypes.array.isRequired,
+    rooms: PropTypes.array.isRequired,
   },
 
   getInitialState: function() {
@@ -110,17 +111,17 @@ var ViewDynamic = React.createClass({
 
 // Some data
 var rooms = [
-  {name:'Office', people: 10},
-  {name:'Kitchen', people: 15},
-  {name:'Floor', people: 3},
-  {name:'Bathroom', people: 0},
+  {name:"Office", people: 10},
+  {name:"Kitchen", people: 15},
+  {name:"Floor", people: 3},
+  {name:"Bathroom", people: 0},
 ]
 
 // As we can see the components can be used exactly the same
 // If we copy the implementation of ViewAfter into ViewBefore,
 // everything keeps working
 var reactElement =
-  <div style={{margin: 'auto', width: 500}}>
+  <div style={{margin: "auto", width: 500}}>
 
     <h3>Before the refactor</h3>
     <ViewBefore rooms={rooms}/>
@@ -133,6 +134,5 @@ var reactElement =
 
   </div>
 
-ReactDOM.render(reactElement, document.getElementById('app'))
-
+ReactDOM.render(reactElement, document.getElementById("app"))
 </script>

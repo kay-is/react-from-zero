@@ -2,18 +2,21 @@
 
 <title>06 Property Types - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script src="https://unpkg.com/prop-types@15.6.1/prop-types.js">
+// PropTypes were removed from React 16 and are now their own package
+</script>
 
 <div id="app"></div>
 
 <script type="text/babel">
-
-// Components get created to encapsule stuff
-// that should be together in one place and for reuse
-// Reuse requires the user of the component to supply the correct properties
-// So we can define a type of each property and set defaults
+// Components get created to encapsule stuff that should be together in one
+// place and for reuse.
+// Reuse requires the user of the component to supply the correct properties so
+// we can define a type of each property and set defaults
 
 function MyComponent(props) {
   return (
@@ -25,17 +28,17 @@ function MyComponent(props) {
 }
 
 // Add the propTypes (function-)property to the component function
-// to let in validate its (element-)properties
+// to let it validate its (element-)properties
 MyComponent.propTypes = {
   // React supplies us with a bunch of types, like string
-  customData: React.PropTypes.string,
+  customData: PropTypes.string,
 }
 
 // Add defaultProps (function-)property to set the defaults
 // if nothing was provided by the user
 MyComponent.defaultProps = {
-  customData: 'default',
-  className: 'default-class',
+  customData: "default",
+  className: "default-class",
 }
 
 // This will show a warning in the console, because customData should be a string
@@ -44,8 +47,7 @@ var reactElement = <MyComponent customData={123}/>
 // This will use the defaults
 reactElement = <MyComponent/>
 
-var renderTarget = document.getElementById('app')
+var renderTarget = document.getElementById("app")
 
 ReactDOM.render(reactElement, renderTarget)
-
 </script>

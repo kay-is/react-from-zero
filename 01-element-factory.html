@@ -2,33 +2,32 @@
 
 <title>01 Element Factory - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
 
-<div id='app'></div>
+<div id="app"></div>
 
 <script>
   // React.createElement() needs type, properties, children.
   // This is less verbose than using plain object literals,
-  // it hides the $$type/Symbol stuff mentioned in 0
-  var reactElement = React.createElement('h1', {
+  // it hides the $$type/Symbol and ref mentioned in lesson 0
+  var reactElement = React.createElement("h1", {
 
-    className: 'abc',
+    className: "abc",
 
     style: {
-      textAlign: 'center',
+      textAlign: "center",
     },
 
-    onClick: function () { alert('click') },
+    onClick: function () { alert("click") },
 
-  }, 'Hello, world!')
+  }, "Hello, world!")
 
 
-  // the second argument is the property object and has to be null if empty
-  var anotherElement = React.createElement('p', null, 'A nice text paragraph.')
+  // The second argument is the property object and has to be null if empty
+  var anotherElement = React.createElement("p", null, "A nice text paragraph.")
 
-  var renderTarget = document.getElementById('app')
+  var renderTarget = document.getElementById("app")
 
   ReactDOM.render(reactElement, renderTarget)
-
 </script>

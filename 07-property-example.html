@@ -2,14 +2,14 @@
 
 <title>07 Property Example - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <div id="app"></div>
 
 <script type="text/babel">
-
 // Here a more practical example of a component
 // it formats a date and returns a <span> containing that formatted string
 function DateSpan(props) {
@@ -24,14 +24,13 @@ function DateSpan(props) {
 // Also a more sophisticated type check for the date property
 // The property is required, because there are no defaults set
 DateSpan.propTypes = {
-  date: React.PropTypes.instanceOf(Date).isRequired,
+  date: PropTypes.instanceOf(Date).isRequired,
 }
 
 // We have to supply a date object and the component does the formatting
 var reactElement = <DateSpan date={new Date()}/>
 
-var renderTarget = document.getElementById('app')
+var renderTarget = document.getElementById("app")
 
 ReactDOM.render(reactElement, renderTarget)
-
 </script>

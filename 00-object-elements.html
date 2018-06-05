@@ -2,8 +2,8 @@
 
 <title>00 Object Elements - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
 
 <div id="app">
   <!--The render target of our React application-->
@@ -12,7 +12,7 @@
 <script>
   // React uses ES2015 Symbols to "tag" its element-objects.
   // It uses a magic number as fallback on older browsers.
-  var magicValue = (Symbol && Symbol.for('react.element')) || 0xeac7
+  var magicValue = (Symbol && Symbol.for("react.element")) || 0xeac7
 
   // React uses virtual DOM elements, which become real DOM elements on a render.
   // A virtual DOM element can be defined as a simple object literal.
@@ -25,44 +25,49 @@
     // React.createElement() sets it for your
     $$typeof: magicValue,
 
+    // This will also be checked by React. We will be talking about references
+    // later, but if you're not using them, this has to be set to null and not
+    // undefined
+    ref: null,
+
     // This defines the HTML-tag
-    type: 'h1',
+    type: "h1",
 
     // This defines the properties that get passed down into the element
     props: {
 
       // In this example there is just a single text node as child
-      children: 'Hello, world!',
+      children: "Hello, world!",
 
       // a CSS class
-      className: 'abc',
+      className: "abc",
 
       // styles can be passed as object literals
       // React uses camelCase instead of dashed-case (like CSS/D3 do)
       style: {
-        textAlign: 'center',
+        textAlign: "center",
       },
 
       // event handlers can be added as properties, too
       // React uses synthetic events, which basically try to normalize browser behaviour
-      onClick: function (notYourRegularEvent) { alert('click') },
+      onClick: function (notYourRegularEvent) { alert("click") },
     },
 
   }
 
-  // another element that doesn't have much configuration
+  // another element that doesn"t have much configuration
   var anotherElement = {
     $$typeof: magicValue,
-    type: 'p',
+    ref: null,
+    type: "p",
     props: {
-      children: 'A nice text paragraph.',
+      children: "A nice text paragraph.",
     },
   }
 
   // React needs a DOM element as render target
-  var renderTarget = document.getElementById('app')
+  var renderTarget = document.getElementById("app")
 
   // ReactDOM is responsible for inserting the element into the DOM
   ReactDOM.render(reactElement, renderTarget)
-
 </script>

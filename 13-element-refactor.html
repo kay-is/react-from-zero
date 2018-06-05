@@ -2,14 +2,14 @@
 
 <title>13 Element Refactor - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/create-react-class@15.6.3/create-react-class.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <div id="app"></div>
 
 <script type="text/babel">
-
 // Refactoring an element is a bit more tricky
 // First, React decides if a tag is an element by checking its case
 // lower case means element
@@ -29,19 +29,19 @@ component = React.createElement(Div, null)
 
 // Second, React converts all events these elements trigger, to
 // synthetic events. This is often not a problem, they are simply events.
-// But you can't trigger your own.
+// But you can"t trigger your own.
 // So even if your <Input> component accepts a onClick callback as property
-// You can't call it with the same event as an <input> element would
+// You can"t call it with the same event as an <input> element would
 
 
 // One approach could be this.
 // We simply implement our own onChange caller
 // Here we create a number input that only calls onChange on number inputs
 // (non-numbers trigger an empty change)
-var NumberInput = React.createClass({
+var NumberInput = createReactClass({
 
   getInitialState: function() {
-    return {value: ''}
+    return {value: ""}
   },
 
   handleInput: function(e) {
@@ -65,7 +65,7 @@ var NumberInput = React.createClass({
 
   render: function () {
 
-    return <input type='number' value={this.state.value} onChange={this.handleInput}/>
+    return <input type="number" value={this.state.value} onChange={this.handleInput}/>
 
   },
 
@@ -77,22 +77,22 @@ function logChange(v){
 
 
 // Here we see, that the new NumberInput has a different interface
-// it's onChange property implies that events will be received, but this isn't
+// it"s onChange property implies that events will be received, but this isn"t
 // the case. Also, even if we would want to call it like the original input,
-// we would need to use upper case, and wouldn't win anything
-var reactElement = <div style={{width: 300, margin: 'auto'}}>
+// we would need to use upper case, and wouldn"t win anything
+var reactElement = <div style={{width: 300, margin: "auto"}}>
 
   <h2>Logging number inputs</h2>
 
   <h2>Before Refactor</h2>
-  <input type='number' onChange={function(e) { logChange(e.target.value) }}/>
+  <input type="number" onChange={function(e) { logChange(e.target.value) }}/>
 
   <h2>After Refactor</h2>
   <NumberInput onChange={logChange}/>
 
 </div>
 
-ReactDOM.render(reactElement, document.getElementById('app'))
+ReactDOM.render(reactElement, document.getElementById("app"))
 
 // Other approaches include not using "default" prop names in the first place
 // onUpdate instead of onChange
@@ -100,5 +100,4 @@ ReactDOM.render(reactElement, document.getElementById('app'))
 // and triggers a onChange, which could cause confusion
 // Often components deliver richer interactions than elements in the first place
 // so their prop methods can reflect that with the name
-
 </script>

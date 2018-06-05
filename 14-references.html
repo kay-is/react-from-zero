@@ -2,18 +2,18 @@
 
 <title>14 References - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/create-react-class@15.6.3/create-react-class.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <div id="app"></div>
 
 <script type="text/babel">
-
 // Sometimes we need some state from an element or a component
 // or it has to be directly modified somehow. For
 // this case, we can tell React to create references.
-var RefComponent = React.createClass({
+var RefComponent = createReactClass({
 
   // First we tell React to render an input with a
   // ref callback, it will be called, when the DOM of the input element
@@ -55,7 +55,5 @@ var reactElement =
     <RefComponent/>
   </div>
 
-
-ReactDOM.render(reactElement, document.getElementById('app'))
-
+ReactDOM.render(reactElement, document.getElementById("app"))
 </script>

@@ -2,31 +2,35 @@
 
 <title>09 Component Classes - React From Zero</title>
 
-<script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
-<script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+<script src="https://unpkg.com/react@16.4.0/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16.4.0/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/prop-types@15.6.1/prop-types.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script src="https://unpkg.com/create-react-class@15.6.3/create-react-class.js">
+// React.createClass was removed from React 16 and is now their own package
+</script>
 
 <div id="app"></div>
 
 <script type="text/babel">
-
 // Often a component needs to maintain some internal state
 // for example if there is interaction involved
 // in this case a component function is not sufficient
 // the component function can only has properties and no state
 // we need a component class with a render function
-var MyComponent = React.createClass({
+var MyComponent = createReactClass({
 
   // used for type-checking of the properties
   // same as with the component function
   propTypes: {
-    color: React.PropTypes.string,
+    color: PropTypes.string,
   },
 
   // this method will be called by React
   // before the components gets mounted into the DOM
   getDefaultProps: function() {
-    return {color: 'green'}
+    return {color: "green"}
   },
 
   // this method will be called by React
@@ -85,15 +89,14 @@ var MyComponent = React.createClass({
 // The interface has not changed for the user of this component
 var reactElement =
   <div>
-    <MyComponent color='red'/>
+    <MyComponent color="red"/>
     <br/>
-    <MyComponent color='blue'/>
+    <MyComponent color="blue"/>
     <br/>
     <MyComponent/>
-  </div>
+  </div>;
 
-var renderTarget = document.getElementById('app')
+var renderTarget = document.getElementById("app")
 
 ReactDOM.render(reactElement, renderTarget)
-
 </script>
