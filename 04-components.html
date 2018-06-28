@@ -35,7 +35,7 @@ function MyComponent() {
 }
 
 // Since React 16.0.0, components can return an array of elements as well
-// In doing so, no additional wrapper element is created.
+// In doing so, no additional wrapper element is created
 // One caveat is that, similarly to what we do when rendering an array,
 // we have to add a unique key to each element in the array
 // (we'll see more on this in the next lesson)
@@ -54,8 +54,8 @@ function MyComponent() {
   var data = "world"
   return (
     <Fragment>
-      <h1 key="hello">Hello</h1>
-      <h2 key="data">{data}</h2>
+      <h1>Hello</h1>
+      <h2>{data}</h2>
     </Fragment>
   )
 }
