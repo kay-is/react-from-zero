@@ -8,16 +8,16 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script src="https://unpkg.com/create-react-class@15.6.3/create-react-class.js">
-// React.createClass was removed from React 16 and is now their own package
+// React.createClass was removed from React 16 and is now its own package
 </script>
 
 <div id="app"></div>
 
 <script type="text/babel">
 // Often a component needs to maintain some internal state
-// for example if there is interaction involved
+// for example if there is an interaction involved
 // in this case a component function is not sufficient
-// the component function can only has properties and no state
+// the component function can only have properties and no state
 // we need a component class with a render function
 var MyComponent = createReactClass({
 
@@ -27,13 +27,15 @@ var MyComponent = createReactClass({
     color: PropTypes.string,
   },
 
-  // this method will be called by React
+  // this method sets default values for missing properties
+  // it will be called by React
   // before the components gets mounted into the DOM
   getDefaultProps: function() {
     return {color: "green"}
   },
 
-  // this method will be called by React
+  // this method sets the initial state for the component
+  // it will be called by React
   // before the components gets mounted into the DOM
   // if this method is missing, this.state will be undefined
   getInitialState: function() {

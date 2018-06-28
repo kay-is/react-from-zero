@@ -29,9 +29,9 @@ component = React.createElement(Div, null)
 
 // Second, React converts all events these elements trigger, to
 // synthetic events. This is often not a problem, they are simply events.
-// But you can"t trigger your own.
-// So even if your <Input> component accepts a onClick callback as property
-// You can"t call it with the same event as an <input> element would
+// But you can't trigger your own.
+// So even if your <Input> component accepts an onClick callback as property
+// You can't call it with the same event as an <input> element would
 
 
 // One approach could be this.
@@ -46,7 +46,7 @@ var NumberInput = createReactClass({
 
   handleInput: function(e) {
 
-    // we could try to modify the event to get or data in
+    // we could try to modify the event to get our data in
     // but this could mess things up
     // instead we prevent this event from further actions
     e.preventDefault()
@@ -58,7 +58,7 @@ var NumberInput = createReactClass({
 
     this.setState({value: newNumber})
 
-    //then we extract our data and give it to onChange
+    // then we extract our data and give it to onChange
     this.props.onChange(newNumber)
 
   },
@@ -77,9 +77,9 @@ function logChange(v){
 
 
 // Here we see, that the new NumberInput has a different interface
-// it"s onChange property implies that events will be received, but this isn"t
+// it's onChange property implies that events will be received, but this isn't
 // the case. Also, even if we would want to call it like the original input,
-// we would need to use upper case, and wouldn"t win anything
+// we would need to use upper case, and wouldn't win anything
 var reactElement = <div style={{width: 300, margin: "auto"}}>
 
   <h2>Logging number inputs</h2>
@@ -96,8 +96,8 @@ ReactDOM.render(reactElement, document.getElementById("app"))
 
 // Other approaches include not using "default" prop names in the first place
 // onUpdate instead of onChange
-// It could also that a component uses onMouseDown to do something internall
-// and triggers a onChange, which could cause confusion
+// It could also happen that a component uses onMouseDown to do something internal
+// and triggers an onChange, which could cause confusion
 // Often components deliver richer interactions than elements in the first place
 // so their prop methods can reflect that with the name
 </script>

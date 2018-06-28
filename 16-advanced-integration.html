@@ -55,8 +55,8 @@ var Visual = createReactClass({
   // before the component will be removed from the DOM.
   // Our canvas will be removed for sure, but often there
   // is state for the library, other objects, listeners etc.
-  // they could be stored at this and should be deleted to
-  // prevent memory leaks
+  // they could be stored on the component and should be
+  // deleted to prevent memory leaks
   componentWillUnmount() {},
 
 })
