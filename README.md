@@ -4,6 +4,10 @@ A simple (99% ES2015 less) tutorial for React
 
 Everything runs in the browser without a manual pre-compilation.
 
+## Translations
+
+- [![china](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **中文/Chinese**](https://github.com/chinanf-boy/react-from-zero)
+
 ## Lessons
 
 [Lesson 0 - Object Elements](https://github.com/kay-is/react-from-zero/blob/master/00-object-elements.html) -
