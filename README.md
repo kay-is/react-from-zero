@@ -44,7 +44,7 @@ Everything runs in the browser without a manual pre-compilation.
 [Preview](https://cdn.rawgit.com/kay-is/react-from-zero/62dc2789/10-example-app.html)
 
 [Lesson 11 - Lifecycle Methods](https://github.com/kay-is/react-from-zero/blob/master/11-lifecycle-methods.html) -
-[Preview](https://cdn.rawgit.com/kay-is/react-from-zero/62dc2789/11-lifecycle-methods.html)
+[Preview](https://cdn.rawgit.com/kay-is/react-from-zero/9e340ca7/11-lifecycle-methods.html)
 
 [Lesson 12 - Component refactor](https://github.com/kay-is/react-from-zero/blob/master/12-component-refactor.html) -
 [Preview](https://cdn.rawgit.com/kay-is/react-from-zero/62dc2789/12-component-refactor.html)
