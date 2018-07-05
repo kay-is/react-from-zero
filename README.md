@@ -62,3 +62,6 @@ Everything runs in the browser without a manual pre-compilation.
 
 [Lesson 16 - Advanced Integration](https://github.com/kay-is/react-from-zero/blob/master/16-advanced-integration.html) -
 [Preview](https://cdn.rawgit.com/kay-is/react-from-zero/b31878c2/16-advanced-integration.html)
+
+[Lesson 17 - Unit Testing](https://github.com/kay-is/react-from-zero/blob/master/17-unit-testing.html) -
+[Preview](https://cdn.rawgit.com/kay-is/react-from-zero/7dc8cf9b/17-unit-testing.html)
