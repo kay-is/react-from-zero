@@ -32,7 +32,7 @@ reactElement = <MyComponent {...props}/>
 // This allows components with dynamic content
 var planets = ["earth", "mars", "venus"]
 
-// If an array is used as "child node" each child needs a unique key-property
+// If an array is used as a "child node" each child needs a unique key-property
 var elements = planets.map(function(planet, index) {
   return <MyComponent className="myClass" customData={planet} key={index}/>
 })
