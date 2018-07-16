@@ -16,6 +16,8 @@ If you want to run the examples with [create-react-app](https://github.com/faceb
 
 - [![Russia](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png) **Russian**](https://github.com/lex111/react-from-zero)
 
+- [![Spain](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png) **Español / Spanish**](https://github.com/sejas/react-desde-cero)
+
 ## Lessons
 
 [Lesson 0 - Object Elements](https://github.com/kay-is/react-from-zero/blob/master/00-object-elements.html) -
