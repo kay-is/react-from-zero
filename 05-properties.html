@@ -19,6 +19,13 @@ function MyComponent(props) {
   )
 }
 
+// Add the defaultProps (function-)property to set the defaults
+// if nothing was provided by the user
+MyComponent.defaultProps = {
+  customData: "default-data",
+  className: "default-class",
+}
+
 var reactElement = <MyComponent className="abc" customData="world"/>
 
 // Which also works with an object and the spread (...) operator

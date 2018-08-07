@@ -34,13 +34,6 @@ MyComponent.propTypes = {
   customData: PropTypes.string,
 }
 
-// Add defaultProps (function-)property to set the defaults
-// if nothing was provided by the user
-MyComponent.defaultProps = {
-  customData: "default",
-  className: "default-class",
-}
-
 // This will show a warning in the console, because customData should be a string
 var reactElement = <MyComponent customData={123}/>
 
