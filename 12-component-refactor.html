@@ -40,7 +40,10 @@ function ViewBefore(props) {
 
 // The component has a simple props-interface
 ViewBefore.propTypes = {
-  rooms: PropTypes.array.isRequired,
+  rooms: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    people: PropTypes.number.isRequired
+  })).isRequired
 }
 
 // Now we switch out the implementation with something more complicated
@@ -66,7 +69,10 @@ function ViewAfter(props) {
 }
 // We keep the props-interface the same
 ViewAfter.propTypes = {
-  rooms: PropTypes.array.isRequired,
+  rooms: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    people: PropTypes.number.isRequired
+  })).isRequired
 }
 
 // We could also switch it with something more dynamic
@@ -74,7 +80,10 @@ var ViewDynamic = createReactClass({
 
   // We still keep the props-interface the same
   propTypes: {
-    rooms: PropTypes.array.isRequired,
+    rooms: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      people: PropTypes.number.isRequired
+    })).isRequired
   },
 
   getInitialState: function() {
