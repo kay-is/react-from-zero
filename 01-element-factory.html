@@ -11,23 +11,31 @@
   // React.createElement() needs type, properties, children.
   // This is less verbose than using plain object literals,
   // it hides the $$type/Symbol and ref mentioned in lesson 0
-  var reactElement = React.createElement("h1", {
+  var reactElement = React.createElement(
+    "h1",
+    {
+      className: "abc",
 
-    className: "abc",
+      style: {
+        textAlign: "center"
+      },
 
-    style: {
-      textAlign: "center",
+      onClick: function () {
+        alert("click");
+      }
     },
+    "Hello, world!"
+  );
 
-    onClick: function () { alert("click") },
+  // The second argument is the property object,
+  // it has to be null if empty
+  var anotherElement = React.createElement(
+    "p",
+    null,
+    "A nice text paragraph."
+  );
 
-  }, "Hello, world!")
+  var renderTarget = document.getElementById("app");
 
-
-  // The second argument is the property object and has to be null if empty
-  var anotherElement = React.createElement("p", null, "A nice text paragraph.")
-
-  var renderTarget = document.getElementById("app")
-
-  ReactDOM.render(reactElement, renderTarget)
+  ReactDOM.render(reactElement, renderTarget);
 </script>

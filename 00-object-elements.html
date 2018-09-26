@@ -12,30 +12,30 @@
 <script>
   // React uses ES2015 Symbols to "tag" its element-objects.
   // It uses a magic number as fallback on older browsers.
-  var magicValue = (Symbol && Symbol.for("react.element")) || 0xeac7
+  var magicValue = (Symbol && Symbol.for("react.element")) || 0xeac7;
 
-  // React uses virtual DOM elements, which become real DOM elements on a render.
-  // A virtual DOM element can be defined as a simple object literal.
-  // Normally you would use the React.createElement() to create an element.
-  // This is what the return value of a React.createElement() call could look like.
+  // React uses virtual DOM elements, which become real DOM elements
+  // on a render. A virtual DOM element can be defined as a simple
+  // object literal. Normally you would use the React.createElement()
+  // to create an element. This is what the return value of a
+  // React.createElement() call could look like.
   var reactElement = {
-
-    // This special property will be checked by React to ensure this object
+    // This special property will be checked by React to ensure this
+    // object
     // is a React element and not just some user data
     // React.createElement() sets it for you
     $$typeof: magicValue,
 
-    // This will also be checked by React. We will be talking about references
-    // later, but if you're not using them, this has to be set to null and not
-    // undefined
+    // This will also be checked by React. We will be talking about
+    // references later, but if you're not using them, this has to be
+    // set to null and not undefined
     ref: null,
 
     // This defines the HTML-tag
     type: "h1",
 
-    // This defines the properties that get passed down into the element
+    // This defines the properties that get passed down to the element
     props: {
-
       // In this example there is just a single text node as child
       children: "Hello, world!",
 
@@ -45,15 +45,17 @@
       // styles can be passed as object literals
       // React uses camelCase instead of dashed-case (like CSS/D3 do)
       style: {
-        textAlign: "center",
+        textAlign: "center"
       },
 
       // event handlers can be added as properties, too
-      // React uses synthetic events, which basically try to normalize browser behaviour
-      onClick: function (notYourRegularEvent) { alert("click") },
-    },
-
-  }
+      // React uses synthetic events to try to normalize browser
+      // behavior
+      onClick: function (notYourRegularEvent) {
+        alert("click");
+      }
+    }
+  };
 
   // another element that doesn"t have much configuration
   var anotherElement = {
@@ -61,13 +63,13 @@
     ref: null,
     type: "p",
     props: {
-      children: "A nice text paragraph.",
-    },
-  }
+      children: "A nice text paragraph."
+    }
+  };
 
   // React needs a DOM element as render target
-  var renderTarget = document.getElementById("app")
+  var renderTarget = document.getElementById("app");
 
   // ReactDOM is responsible for inserting the element into the DOM
-  ReactDOM.render(reactElement, renderTarget)
+  ReactDOM.render(reactElement, renderTarget);
 </script>

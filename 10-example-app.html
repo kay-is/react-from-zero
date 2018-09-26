@@ -9,118 +9,135 @@
 
 <div id="app"></div>
 
-<script type="text/babel">
-// An example of a simple React app
-// It uses simple component functions for its stateless components
-// and a complex component class to handle the interactions
-
-// First we have the Task and TaskList
-// They get all their data/state through their properties
-// <TaskList>
-//   <Task text="Do something"/>
-//   <Task text="Do nothing"/>
-// </TaskList>
-
-// Task needs a text property
-function Task(props) {
-  return <li>{props.text}</li>
-}
-
-// TaskList needs an array of Task in its children property
-function TaskList(props) {
-  // Print the first element bold
+<script type="text/babel">var Idle = function(props) {
   return (
-    <ul>
-      <b key={0}>{props.children[0]}</b>
-      {props.children.slice(1)}
-    </ul>
-  )
-}
+    <React.Fragment>
+      <button onClick={props.onStart}>Start timer</button>
+      <h2>No Timer Running.</h2>
+    </React.Fragment>
+  );
+};
 
-// This component handles the input
-// It needs to be a class, because the <input> element is stateful
-var TaskInput = createReactClass({
-
+var Timer = createReactClass({
   getInitialState: function() {
-    return {value: ""}
+    return { seconds: this.props.minutes * 60 };
   },
 
-  // gets called when someone types into the <input> element
-  handleChange: function(e) {
-    this.setState({value: e.target.value})
+  countDown: function() {
+    var onFinish = this.props.onFinish;
+    this.setState(function(prevState) {
+      var secondsLeft = prevState.seconds - 1;
+
+      if (secondsLeft < 1) return onFinish();
+
+      return { seconds: secondsLeft };
+    });
   },
 
-  // gets called when someone clicks the <button> element
-  handleAdd: function(e) {
-    if (!this.state.value) return
-
-    // call the function that was added into its onAdd property
-    this.props.onAdd(this.state.value)
-
-    // clear the state so the input is empty again after an add
-    this.setState({value: ""})
+  interval: null,
+  componentDidMount: function() {
+    this.interval = setInterval(this.countDown, 1000);
   },
-
-  // renders the elements every time someone types or adds
-  render: function() {
-    return (
-      <div>
-
-        <input
-          placeholder="Enter Task	."
-          value={this.state.value}
-          onChange={this.handleChange}/>
-
-        <button onClick={this.handleAdd}>Add</button>
-
-      </div>
-    )
-  },
-
-})
-
-// The app keeps track of the current tasks in its state
-var TodoApp = createReactClass({
-
-  getInitialState: function() {
-    return {tasks: []}
-  },
-
-  // this callback will be inserted into the onAdd property of the <TaskInput> component
-  handleAdd: function(task) {
-    // adding a new task
-    var tasks = [task].concat(this.state.tasks)
-
-    // this forces the <TodoApp> component to render
-    this.setState({tasks: tasks})
+  componentWillUnmount: function() {
+    clearInterval(this.interval);
   },
 
   render: function() {
-    // create the list of <Task> components from the tasks array in the state
-    var taskElements = this.state.tasks.map(function(t, i) {
-      return <Task key={i} text={t}/>
-    })
+    var seconds = this.state.seconds;
+    var minutes = Math.floor(seconds / 60);
+    seconds = seconds % 60;
 
-    // some simple styling
-    // and adding the add handler to the <TaskInput> component
     return (
-      <div style={{width: 300, margin: "auto"}}>
+      <React.Fragment>
+        <button onClick={this.props.onStop}>Stop timer</button>
+        <h2 style={{ color: this.props.color }}>
+          {this.props.title} for {minutes} minutes and {seconds}{" "}
+          seconds.
+        </h2>
+      </React.Fragment>
+    );
+  }
+});
 
-        <TaskInput onAdd={this.handleAdd}/>
+var PomodoroApp = createReactClass({
+  IDLE: 0,
+  WORK: 1,
+  PAUSE: 2,
 
-        <TaskList>
-          {taskElements}
-        </TaskList>
-
-      </div>
-    )
+  getInitialState: function() {
+    return {
+      count: 0,
+      step: this.IDLE
+    };
   },
 
-})
+  handleWork: function() {
+    this.setState({ step: this.WORK });
+  },
 
-var renderTarget = document.getElementById("app")
+  handlePause: function() {
+    this.setState(function(prevState) {
+      return {
+        count: prevState.count + 1,
+        step: this.PAUSE
+      };
+    });
+  },
 
-// we can use components directly
-ReactDOM.render(<TodoApp/>, renderTarget)
+  handleIdle: function() {
+    this.setState({ step: this.IDLE });
+  },
 
+  getTimerElement: function() {
+    var step = this.state.step;
+
+    if (step == this.PAUSE)
+      return (
+        <Timer
+          key="pause"
+          title="Pause"
+          color="green"
+          minutes={5}
+          onFinish={this.handleWork}
+          onStop={this.handleIdle}
+        />
+      );
+
+    if (step == this.WORK)
+      return (
+        <Timer
+          key="work"
+          title="Work"
+          color="orange"
+          minutes={25}
+          onFinish={this.handlePause}
+          onStop={this.handleIdle}
+        />
+      );
+
+    return <Idle onStart={this.handleWork} />;
+  },
+
+  style: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+
+  render: function() {
+    var count = this.state.count;
+
+    return (
+      <div style={this.style}>
+        <h1>Pomodoro Timer</h1>
+        {this.getTimerElement()}
+        {!!count && <h2>You worked {count * 25} minutes today!</h2>}
+      </div>
+    );
+  }
+});
+
+var renderTarget = document.getElementById("app");
+
+ReactDOM.render(<PomodoroApp />, renderTarget);
 </script>

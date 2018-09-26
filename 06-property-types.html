@@ -13,10 +13,10 @@
 <div id="app"></div>
 
 <script type="text/babel">
-// Components get created to encapsulate stuff that should be together in one
-// place and for reuse.
-// Reuse requires the user of the component to supply the correct properties so
-// we can define a type of each property and set defaults
+// Components get created to encapsulate stuff that should be together
+// in one place and for reuse. Reuse requires the user of the
+// component to supply the correct properties so we can define a type
+// of each property and set defaults
 
 function MyComponent(props) {
   return (
@@ -24,23 +24,24 @@ function MyComponent(props) {
       <h1>Hello</h1>
       <h2>{props.customData}</h2>
     </div>
-  )
+  );
 }
 
 // Add the propTypes (function-)property to the component function
 // to let it validate its (element-)properties
 MyComponent.propTypes = {
   // React supplies us with a bunch of types, like string
-  customData: PropTypes.string,
-}
+  customData: PropTypes.string
+};
 
-// This will show a warning in the console, because customData should be a string
-var reactElement = <MyComponent customData={123}/>
+// This will show a warning in the console, because customData should
+// be a string
+var reactElement = <MyComponent customData={123} />;
 
 // This will use the defaults
-reactElement = <MyComponent/>
+reactElement = <MyComponent />;
 
-var renderTarget = document.getElementById("app")
+var renderTarget = document.getElementById("app");
 
-ReactDOM.render(reactElement, renderTarget)
+ReactDOM.render(reactElement, renderTarget);
 </script>

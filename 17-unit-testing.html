@@ -6,17 +6,17 @@
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
 <script src="https://unpkg.com/mocha@5.2.0/mocha.js">
-  // the basic test tool for React is Jest, but it doesn't run in the browser
-  // that's why we only use parts of Jest (expect and jest-mock) here to
-  // illustrate basic testing setup. Mocha is used as an alternative test runner
+// The basic test tool for React is Jest, but it doesn't run in the
+// browser. That's why we only use parts of Jest (expect and
+// jest-mock) here to illustrate basic testing setup. Mocha is used as
+// an alternative test runner.
 </script>
 <link href="https://unpkg.com/mocha@5.2.0/mocha.css" rel="stylesheet" />
 
-<!--
-  the shallow renderer is needed to render components without the need of
-  ReactDOM or a DOM in general
--->
-<script src="https://unpkg.com/react-test-renderer@16.4.1/umd/react-test-renderer-shallow.development.js"></script>
+<script src="https://unpkg.com/react-test-renderer@16.4.1/umd/react-test-renderer-shallow.development.js">
+// The shallow renderer is needed to render components without the
+// need of ReactDOM or a DOM in general
+</script>
 
 <!-- these two libraries are parts of the Jest tooling -->
 <script src="https://unpkg.com/expect@%3C21/umd/expect.min.js"></script>
@@ -26,62 +26,62 @@
 <div id="mocha"></div>
 
 <script type="text/babel">
-  // if you use Jest later, ignore Mocha specific code
-  mocha.setup("bdd");
+// if you use Jest later, ignore Mocha specific code
+mocha.setup("bdd");
 
-  // a simple component. It would normally be imported from another file
-  const MyComponent = () => (
-    <div>
+// a simple component. It would normally be imported from another file
+const MyComponent = () => (
+  <div>
+    <span className="heading">Title</span>
+  </div>
+);
+
+// the first test, Jest and Mocha both using describe() and it()
+describe("Component", () => {
+  it("should render", () => {
+    // a new renderer is created and used to render the component
+    const renderer = new ReactShallowRenderer();
+    renderer.render(<MyComponent />);
+
+    // result here should look quiet familiar from lesson 00
+    let result = renderer.getRenderOutput();
+
+    // now you can traverse the result and check it for correctness
+    expect(result.type).toBe("div");
+    expect(result.props.children).toEqual(
       <span className="heading">Title</span>
-    </div>
-  );
+    );
 
-  // the first test, Jest and Mocha both using describe() and it()
-  describe("Component", () => {
-    it("should render", () => {
-      // a new renderer is created and used to render the component
-      const renderer = new ReactShallowRenderer();
-      renderer.render(<MyComponent />);
-
-      // result here should look quiet familiar from lesson 00
-      let result = renderer.getRenderOutput();
-
-      // now you can traverse the result and check it for correctness
-      expect(result.type).toBe("div");
-      expect(result.props.children).toEqual(
-        <span className="heading">Title</span>
-      );
-
-      // Jest can also create snapshot files
-      // they will be used to check for changes in the next test-runs
-      // expect(result).toMatchSnapshot();
-    });
+    // Jest can also create snapshot files
+    // they will be used to check for changes in the next test-runs
+    // expect(result).toMatchSnapshot();
   });
+});
 
-  // it is also possible to mock parts of target code with Jest
+// it is also possible to mock parts of target code with Jest
 
-  // here we use the mock part of Jest stand-alone
-  // normally this is part of the global "jest" object
-  const jest = window["jest-mock"];
+// here we use the mock part of Jest stand-alone
+// normally this is part of the global "jest" object
+const jest = window["jest-mock"];
 
-  // mocking a function to test callback behaviour
-  const mockCallback = jest.fn();
+// mocking a function to test callback behaviour
+const mockCallback = jest.fn();
 
-  describe("Callback", () => {
-    it("should be called two  times", () => {
-      // a test function that calls a callback two times
-      const callCallback = c => {
-        c();
-        c();
-      };
+describe("Callback", () => {
+  it("should be called two  times", () => {
+    // a test function that calls a callback two times
+    const callCallback = c => {
+      c();
+      c();
+    };
 
-      callCallback(mockCallback);
+    callCallback(mockCallback);
 
-      // the mocked function has some properties to check its usage
-      expect(mockCallback.mock.calls.length).toBe(2);
-    });
+    // the mocked function has some properties to check its usage
+    expect(mockCallback.mock.calls.length).toBe(2);
   });
+});
 
-  mocha.checkLeaks();
-  mocha.run();
+mocha.checkLeaks();
+mocha.run();
 </script>

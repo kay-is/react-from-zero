@@ -10,27 +10,31 @@
 <div id="app"></div>
 
 <script type="text/babel">
-// Here's a more practical example of a component
-// it formats a date and returns a <span> containing that formatted string
-function DateSpan(props) {
+// Here's a more practical example of a component, it formats a date
+// and returns a <span> containing that formatted string.
+  function DateSpan(props) {
   var date = props.date,
     day = date.getDate(),
     month = date.getMonth() + 1,
-    year = date.getFullYear()
+    year = date.getFullYear();
 
-  return <span>{day}.{month}.{year}</span>
+  return (
+    <span>
+      {day}.{month}.{year}
+    </span>
+  );
 }
 
 // Also a more sophisticated type check for the date property
 // The property is required, because there are no defaults set
 DateSpan.propTypes = {
-  date: PropTypes.instanceOf(Date).isRequired,
-}
+  date: PropTypes.instanceOf(Date).isRequired
+};
 
-// We have to supply a date object and the component does the formatting
-var reactElement = <DateSpan date={new Date()}/>
+// We have to supply a date object, the component does the formatting
+var reactElement = <DateSpan date={new Date()} />;
 
-var renderTarget = document.getElementById("app")
+var renderTarget = document.getElementById("app");
 
-ReactDOM.render(reactElement, renderTarget)
+ReactDOM.render(reactElement, renderTarget);
 </script>

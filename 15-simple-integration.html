@@ -20,21 +20,23 @@
 // directly in JSX with the help of {}, since they are
 // just function calls
 var DateToday = function() {
-  return <span>{moment().format("DD.MM.YYYY")}</span>
-}
+  return <span>{moment().format("DD.MM.YYYY")}</span>;
+};
 
-var tomorrow = moment().add(1, "day")
+var tomorrow = moment().add(1, "day");
 
 // Nothing exciting happening here, just calling the library
 // and displaying its return values. First with some
 // elements, then used inside of a component.
-var reactElement =
+var reactElement = (
   <div>
-    <h1 style={{textAlign:"center"}}>
-      Tomorrow is {tomorrow.format("MMMM")} the {tomorrow.format("Do")}
+    <h1 style={{ textAlign: "center" }}>
+      Tomorrow is {tomorrow.format("MMMM")} the{" "}
+      {tomorrow.format("Do")}
     </h1>
-    <DateToday/>
+    <DateToday />
   </div>
+);
 
-ReactDOM.render(reactElement, document.getElementById("app"))
+ReactDOM.render(reactElement, document.getElementById("app"));  
 </script>

@@ -14,65 +14,64 @@
 // see them as a mix of controller and view of MVC
 
 // Here we use stand alone elements and some data
-var data = "world"
-var reactElement =
+var data = "world";
+var reactElement = (
   <div>
     <h1>Hello</h1>
     <h2>{data}</h2>
   </div>
+);
 
 // Here the elements are encapsuled in a simple component function
-// They have to start with a capital letter and
-// return exactly ONE root element with or without nested elements (before React 16)
+// They have to start with a capital letter and return exactly ONE
+// root element with or without nested elements (before React 16)
 function MyComponent() {
-  var data = "world"
+  var data = "world";
   return (
     <div>
       <h1>Hello</h1>
       <h2>{data}</h2>
     </div>
-  )
+  );
 }
 
-// Since React 16.0.0, components can return an array of elements as well
-// In doing so, no additional wrapper element is created
-// One caveat is that, similarly to what we do when rendering an array,
-// we have to add a unique key to each element in the array, also don't forget the commas
-// (we'll see more on this in the next lesson)
+// Since React 16.0.0, components can return an array of elements as
+// well. In doing so, no additional wrapper element is created. One
+// caveat is that, similarly to what we do when rendering an array, we
+// have to add a unique key to each element in the array, also don't
+// forget the commas (we'll see more on this in the next lesson)
 function MyComponent() {
-  var data = "world"
-  return [
-    <h1 key="hello">Hello</h1>,
-    <h2 key="data">{data}</h2>
-  ]
+  var data = "world";
+  return [<h1 key="hello">Hello</h1>, <h2 key="data">{data}</h2>];
 }
 
-// Since React 16.2.0, we can use special "wrapper" components called fragments
-// that behave the same (no extra wrapper element created)
-// but remove the need to explicitly set keys (fragments do this under the hood) and commas
+// Since React 16.2.0, we can use special "wrapper" components called
+// fragments that behave the same (no extra wrapper element created)
+// but remove the need to explicitly set keys (fragments do this under
+// the hood) and commas.
 function MyComponent() {
-  var data = "world"
+  var data = "world";
   return (
     <React.Fragment>
       <h1>Hello</h1>
       <h2>{data}</h2>
     </React.Fragment>
-  )
+  );
 }
 
 // a component function can be used like an element
-reactElement = <MyComponent/>
+reactElement = <MyComponent />;
 
 // this translates to a React.createElement() call
 // the null indicates that no properties have been set
-reactElement = React.createElement(MyComponent, null)
+reactElement = React.createElement(MyComponent, null);
 
 //  for reference a react-internal <div> tag
-var anotherElement = <div/>
+var anotherElement = <div />;
 // gets converted to
-anotherElement = React.createElement("div", null)
+anotherElement = React.createElement("div", null);
 
-var renderTarget = document.getElementById("app")
+var renderTarget = document.getElementById("app");
 
-ReactDOM.render(reactElement, renderTarget)
+ReactDOM.render(reactElement, renderTarget);
 </script>

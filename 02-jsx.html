@@ -7,8 +7,9 @@
 
 <script src="https://unpkg.com/@babel/standalone/babel.min.js">
 // Now we will use JSX, which needs to be converted to JavaScript.
-// For this we will use Babel. Babel is normally used to convert ES2015 to ES5, but
-// it also can convert JSX to ES5. Babels browser version uses text/babel script tags.
+// For this we will use Babel. Babel is normally used to convert
+// ES2015 to ES5, but it also can convert JSX to ES5. Babels browser
+// version uses text/babel script tags.
 </script>
 
 <div id="app"></div>
@@ -17,30 +18,42 @@
 // JSX is the idiomatic way of creating elements.
 // It's basically XHTML with {} for dynamic content
 // also class has to be called className
-var reactElement =
+var reactElement = (
   <h1
     className="abc"
-    style={{textAlign: "center"}}
-    onClick={function() { alert("click") }}>
+    style={{ textAlign: "center" }}
+    onClick={function() {
+      alert("click");
+    }}
+  >
     Hello, world!
   </h1>
+);
 
 // Is the same as
-reactElement =
-  React.createElement(
-    "h1",
-    {className: "abc", style: {textAlign: "center"},
-    onClick: function() { alert("click") }},
-    "Hello, world!"
-  )
+reactElement = React.createElement(
+  "h1",
+  {
+    className: "abc",
+    style: { textAlign: "center" },
+    onClick: function() {
+      alert("click");
+    }
+  },
+  "Hello, world!"
+);
 
-// JSX shines especially with simple elements that make up the majority
-var anotherElement = <p>A nice text paragraph.</p>
+// JSX shines with simple elements that make up the majority
+var anotherElement = <p>A nice text paragraph.</p>;
 // Is the same as
-anotherElement = React.createElement("p", null, "A nice text paragraph.")
+anotherElement = React.createElement(
+  "p",
+  null,
+  "A nice text paragraph."
+);
 
 // As we can see, everything else works as before
-var renderTarget = document.getElementById("app")
+var renderTarget = document.getElementById("app");
 
-ReactDOM.render(reactElement, renderTarget)
+ReactDOM.render(reactElement, renderTarget);
 </script>

@@ -13,7 +13,7 @@
 <script type="text/babel">
 // Refactoring is another thing that is nice with React
 // First we'll talk about refactoring one component into another
-// if you're lucky, you can just change the implementation of a component
+// if we're lucky, we can just change the components implementation
 // and don't need to change anything at the call-site
 
 // We start with a component that renders records somehow
@@ -28,14 +28,16 @@ function ViewBefore(props) {
       </thead>
       <tbody>
         {props.rooms.map(function(room, k) {
-          return <tr key={k}>
-            <td>{room.name}</td>
-            <td>{room.people}</td>
-          </tr>
+          return (
+            <tr key={k}>
+              <td>{room.name}</td>
+              <td>{room.people}</td>
+            </tr>
+          );
         })}
       </tbody>
     </table>
-  )
+  );
 }
 
 // The component has a simple props-interface
@@ -46,7 +48,7 @@ ViewBefore.propTypes = {
   })).isRequired
 }
 
-// Now we switch out the implementation with something more complicated
+// We switch out the implementation with something more complex
 function ViewAfter(props) {
   return (
     <div>
@@ -54,18 +56,21 @@ function ViewAfter(props) {
         var barStyle = {
           display: "inline-block",
           background: "lightgrey",
-          width: room.people * 25,
-        }
-        return <div key={k}>
-          {room.people > 0
-            ? <span style={barStyle}>{room.people} People</span>
-            : <span>0 People</span>
-          }
-          <span> in {room.name}</span>
-        </div>
+          width: room.people * 25
+        };
+        return (
+          <div key={k}>
+            {room.people > 0 ? (
+              <span style={barStyle}>{room.people} People</span>
+            ) : (
+              <span>0 People</span>
+            )}
+            <span> in {room.name}</span>
+          </div>
+        );
       })}
     </div>
-  )
+  );
 }
 // We keep the props-interface the same
 ViewAfter.propTypes = {
@@ -77,7 +82,6 @@ ViewAfter.propTypes = {
 
 // We could also switch it with something more dynamic
 var ViewDynamic = createReactClass({
-
   // We still keep the props-interface the same
   propTypes: {
     rooms: PropTypes.arrayOf(PropTypes.shape({
@@ -87,61 +91,60 @@ var ViewDynamic = createReactClass({
   },
 
   getInitialState: function() {
-    return {currentRoom: 0}
+    return { currentRoom: 0 };
   },
 
   componentDidMount() {
-    var component = this
-    var props = this.props
+    var component = this;
+    var props = this.props;
 
     this.interval = setInterval(function() {
-      var currentRoom = component.state.currentRoom < props.rooms.length - 1
-        ? component.state.currentRoom + 1
-        : 0
-      component.setState({currentRoom: currentRoom})
-    }, 1000)
+      var currentRoom =
+        component.state.currentRoom < props.rooms.length - 1
+          ? component.state.currentRoom + 1
+          : 0;
+      component.setState({ currentRoom: currentRoom });
+    }, 1000);
   },
 
   componentWillUnmount() {
-    clearInterval(this.interval)
+    clearInterval(this.interval);
   },
 
   render: function() {
-    var room = this.props.rooms[this.state.currentRoom]
+    var room = this.props.rooms[this.state.currentRoom];
 
     return (
-      <span style={{color: this.state.color}}>
+      <span style={{ color: this.state.color }}>
         Room <b>{room.name}</b> has <b>{room.people}</b> People.
       </span>
-    )
-  },
-
-})
+    );
+  }
+});
 
 // Some data
 var rooms = [
-  {name:"Office", people: 10},
-  {name:"Kitchen", people: 15},
-  {name:"Floor", people: 3},
-  {name:"Bathroom", people: 0},
-]
+  { name: "Office", people: 10 },
+  { name: "Kitchen", people: 15 },
+  { name: "Floor", people: 3 },
+  { name: "Bathroom", people: 0 }
+];
 
 // As we can see the components can be used exactly the same
 // If we copy the implementation of ViewAfter into ViewBefore,
 // everything keeps working
-var reactElement =
-  <div style={{margin: "auto", width: 500}}>
-
+var reactElement = (
+  <div style={{ margin: "auto", width: 500 }}>
     <h3>Before the refactor</h3>
-    <ViewBefore rooms={rooms}/>
+    <ViewBefore rooms={rooms} />
 
     <h3>After the refactor</h3>
-    <ViewAfter rooms={rooms}/>
+    <ViewAfter rooms={rooms} />
 
     <h3>Dynamic refactor</h3>
-    <ViewDynamic rooms={rooms}/>
-
+    <ViewDynamic rooms={rooms} />
   </div>
+);
 
-ReactDOM.render(reactElement, document.getElementById("app"))
+ReactDOM.render(reactElement, document.getElementById("app"));
 </script>

@@ -14,46 +14,44 @@
 // or it has to be directly modified somehow. For
 // this case, we can tell React to create references.
 var RefComponent = createReactClass({
-
-  // First we tell React to render an input with a
-  // ref callback, it will be called, when the DOM of the input element
-  // is available
+  // First we tell React to render an input with a ref callback, it
+  // will be called, when the DOM of the input element is available
   render: function() {
     return (
       <div>
-        <input ref={this.handleRef}/>
+        <input ref={this.handleRef} />
         <button onClick={this.handleClick}>Do Something</button>
       </div>
-    )
+    );
   },
 
-  // This callback is called when the input element was mounted into the DOM
-  // and again, with null, when it was unmounted again
+  // This callback is called when the input element was mounted into
+  // the DOM and again, with null, when it was unmounted again
   // For elements the rendered DOM node will be stored
   // For components the instance of the component will be stored.
   handleRef(nameInput) {
     // We save a reference to it for later use.
-    this.nameInput = nameInput
+    this.nameInput = nameInput;
   },
 
   // This callback is called when the button is clicked
   // and uses this.nameInput to read out the value of the input.
   handleClick: function() {
-    console.log(this.nameInput.value)
-  },
-
-})
+    console.log(this.nameInput.value);
+  }
+});
 
 // Since references are local to their component
 // they can be used as local IDs to get elements
 // and don't override each other when another
 // instance of the component is created
-var reactElement =
+var reactElement = (
   <div>
-    <RefComponent/>
-    <RefComponent/>
-    <RefComponent/>
+    <RefComponent />
+    <RefComponent />
+    <RefComponent />
   </div>
+);
 
-ReactDOM.render(reactElement, document.getElementById("app"))
+ReactDOM.render(reactElement, document.getElementById("app"));
 </script>
