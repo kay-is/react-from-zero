@@ -30,15 +30,13 @@
 mocha.setup("bdd");
 
 // a simple component. It would normally be imported from another file
-var MyComponent = () => (
-  <div>
-    <span className="heading">Title</span>
-  </div>
-);
+function MyComponent() {
+  return <div><span className="heading">Title</span></div>;
+}
 
 // the first test, Jest and Mocha both using describe() and it()
-describe("Component", () => {
-  it("should render", () => {
+describe("Component", function() {
+  it("should render", function() {
     // a new renderer is created and used to render the component
     var renderer = new ReactShallowRenderer();
     renderer.render(<MyComponent />);
@@ -67,13 +65,13 @@ var jest = window["jest-mock"];
 // mocking a function to test callback behaviour
 var mockCallback = jest.fn();
 
-describe("Callback", () => {
-  it("should be called two  times", () => {
+describe("Callback", function() {
+  it("should be called two  times", function() {
     // a test function that calls a callback two times
-    var callCallback = c => {
+    function callCallback(c) {
       c();
       c();
-    };
+    }
 
     callCallback(mockCallback);
 
