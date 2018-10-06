@@ -30,7 +30,7 @@
 mocha.setup("bdd");
 
 // a simple component. It would normally be imported from another file
-const MyComponent = () => (
+var MyComponent = () => (
   <div>
     <span className="heading">Title</span>
   </div>
@@ -40,11 +40,11 @@ const MyComponent = () => (
 describe("Component", () => {
   it("should render", () => {
     // a new renderer is created and used to render the component
-    const renderer = new ReactShallowRenderer();
+    var renderer = new ReactShallowRenderer();
     renderer.render(<MyComponent />);
 
     // result here should look quiet familiar from lesson 00
-    let result = renderer.getRenderOutput();
+    var result = renderer.getRenderOutput();
 
     // now you can traverse the result and check it for correctness
     expect(result.type).toBe("div");
@@ -62,15 +62,15 @@ describe("Component", () => {
 
 // here we use the mock part of Jest stand-alone
 // normally this is part of the global "jest" object
-const jest = window["jest-mock"];
+var jest = window["jest-mock"];
 
 // mocking a function to test callback behaviour
-const mockCallback = jest.fn();
+var mockCallback = jest.fn();
 
 describe("Callback", () => {
   it("should be called two  times", () => {
     // a test function that calls a callback two times
-    const callCallback = c => {
+    var callCallback = c => {
       c();
       c();
     };
