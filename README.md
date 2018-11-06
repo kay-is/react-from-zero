@@ -1,8 +1,6 @@
 # React From Zero
 
-A simple (99% ES2015 less) tutorial for React
-
-Everything runs in the browser without a manual pre-compilation.
+A simple (99% ES2015 less) tutorial for React. Everything runs in the browser without a manual pre-compilation.
 
 [![Book Banner](https://i.imgur.com/ZbXgQrw.png)](https://www.fullstackreact.com/react-from-zero/)
 
